@@ -41,9 +41,21 @@ class Solr::Connection
     @autocommit = opts[:autocommit] == :on
   
     # Not actually opening the connection yet, just setting up the persistent connection.
-    @connection = Net::HTTP.new(@url.host, @url.port)
+    # Using a proxy if required
+    if proxy 
+      @connection = Net::HTTP::Proxy(proxy.host, proxy.port).new(@url.host, @url.port)
+    else
+      @connection = Net::HTTP.new(@url.host, @url.port)
+    end
     
     @connection.read_timeout = opts[:timeout] if opts[:timeout]
+  end
+
+  # check for http_proxy and use if set
+
+  def proxy
+    http_proxy = ENV["http_proxy"]
+    proxy = URI.parse(http_proxy) rescue nil
   end
 
   # add a document to the index. you can pass in either a hash
