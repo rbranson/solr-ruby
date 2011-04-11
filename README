@@ -1,5 +1,3 @@
-# See CHANGES for for differences in this fork to original  
-
 solr-ruby exposes the power of Solr as a Ruby  DSL (domain specific language).
 
   Visit the solr-ruby wiki for more information: http://wiki.apache.org/solr/solr-ruby
@@ -50,6 +48,10 @@ then build the gem:
 and install the versioned gem:
 
   gem install pkg/solr-x.x.x.gem 
+
+HTTP_PROXY
+
+If your http_proxy environment variable is set, solr-ruby will try and use it
 
 LICENSE
 
