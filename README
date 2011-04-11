@@ -1,3 +1,5 @@
+# See CHANGES for for differences in this fork to original  
+
 solr-ruby exposes the power of Solr as a Ruby  DSL (domain specific language).
 
   Visit the solr-ruby wiki for more information: http://wiki.apache.org/solr/solr-ruby
