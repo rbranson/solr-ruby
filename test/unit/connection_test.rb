@@ -20,7 +20,7 @@ class ConnectionTest < SolrMockBaseTestCase
     set_post_return("foo")
     assert_equal "foo", connection.post(Solr::Request::AddDocument.new)
   end
-  
+
   def test_bad_url
     assert_raise(RuntimeError) do
       Connection.new("ftp://localhost:9999")

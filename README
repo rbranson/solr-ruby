@@ -49,6 +49,10 @@ and install the versioned gem:
 
   gem install pkg/solr-x.x.x.gem 
 
+HTTP_PROXY
+
+If your http_proxy environment variable is set, solr-ruby will try and use it
+
 LICENSE
 
 This package is licensed using the Apache Software License 2.0.

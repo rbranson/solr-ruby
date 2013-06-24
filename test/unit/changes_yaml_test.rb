@@ -11,6 +11,7 @@
 # limitations under the License.
 
 require 'test/unit'
+require 'yaml'
 
 class ChangesYamlTest < Test::Unit::TestCase
   def test_parse

@@ -11,6 +11,7 @@
 # limitations under the License.
 
 require 'net/http'
+require 'ostruct'
 
 # TODO: add a convenience method to POST a Solr .xml file, like Solr's example post.sh
 
@@ -41,7 +42,9 @@ class Solr::Connection
     @autocommit = opts[:autocommit] == :on
   
     # Not actually opening the connection yet, just setting up the persistent connection.
-    @connection = Net::HTTP.new(@url.host, @url.port)
+    # Using a proxy if required
+    proxy = ENV['http_proxy'] ? URI.parse(ENV['http_proxy']) : OpenStruct.new
+    @connection = Net::HTTP::Proxy(proxy.host, proxy.port).new(@url.host, @url.port)
     
     @connection.read_timeout = opts[:timeout] if opts[:timeout]
   end
