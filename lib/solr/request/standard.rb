@@ -13,17 +13,20 @@
 class Solr::Request::Standard < Solr::Request::Select
 
   VALID_PARAMS = [:query, :sort, :default_field, :operator, :start, :rows, :shards,
-    :filter_queries, :field_list, :debug_query, :explain_other, :facets, :highlighting, :mlt]
+    :filter_queries, :field_list, :debug_query, :explain_other, :facets, :highlighting, :mlt, :handler]
   
   def initialize(params)
-    super('standard')
+    @params = params.dup
+
+		# Check for handler option, pass in to Request::Select if present
+		@params[:handler] = params[:handler] || 'standard'
+    super(@params[:handler])
     
     raise "Invalid parameters: #{(params.keys - VALID_PARAMS).join(',')}" unless 
       (params.keys - VALID_PARAMS).empty?
     
     raise ":query parameter required" unless params[:query]
-    
-    @params = params.dup
+
     
     # Validate operator
     if params[:operator]
